@@ -1,0 +1,3 @@
+[submodule "public/esc-Script"]
+	path = public/esc-Script
+	url = https://github.com/high0301/esc-Script.git

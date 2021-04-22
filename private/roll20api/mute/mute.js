@@ -7,7 +7,7 @@ on('chat:message', function(msg) {
        (muteOn == true)? muteOn = false : muteOn = true;
        if ( muteOn == true ) {
         playerName = msg.content.replace('!m ',"");
-        log("입력된 이름: "+playerName)
+        sendChat("음소거","/w gm "+ playerName + "가/이 음소거 되었습니다.");
         playerID = findObjs({ type: 'player', _displayname: playerName });
         playerID = playerID[0].get('_id');
        } else { 
@@ -27,5 +27,3 @@ on('chat:message', function(msg) {
        }
    }
 });
-
-//테스트2

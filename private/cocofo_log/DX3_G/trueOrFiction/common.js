@@ -1,6 +1,6 @@
 window.onload = function () {
     gsap.registerPlugin(ScrollTrigger);
-
+    const sceneTitle = document.querySelector('.scene-title');
     const allChat = document.querySelectorAll('.chat')
     allChat.forEach((value, key) => {
         value.addEventListener('click', chatClickEvnet, false);
@@ -9,16 +9,22 @@ window.onload = function () {
     // window.addEventListener("scroll", scrollEvent);
 
     for (let i= 1; i <= logData.scene; i++) {
-        // ScrollTrigger.create({
-        //     trigger: "#scene"+i,
-        //     start: "top top",
-        //     endTrigger: "#scene"+(i+1),
-        //     end: "bottom bottom",
-        //     onToggle: self => console.log("start"),
-        //     onUpdate: self => {
-        //         document.querySelector("#container").style.background = `rgba(${i*30},${i*30},${i*30},1)`;
-        //     }
-        // })
+        ScrollTrigger.create({
+            trigger: "#scene"+i,
+            start: "0 50%",
+            // endTrigger: "#scene"+(i+1),
+            // end: "bottom bottom",
+            onToggle: self => {
+
+            },
+            onUpdate: self => {
+                sceneTitle.querySelector("h2").innerText = "scene"+i;
+                sceneTitle.classList.add("on");
+                setTimeout(function () {
+                    sceneTitle.classList.remove("on");
+                }, 2500);
+            }
+        })
     }
     ScrollTrigger.create({
         trigger: ".past-scene-start",
@@ -95,13 +101,14 @@ const chatClickEvnet = (e) => {
     const chatBox = document.querySelector(".characterBox");
     const chatName = e.target.querySelector("strong").innerText;
     const chatImg = logData.player[chatClass]?.image ? logData.player[chatClass].image : '' ;
-    const chatdata = new ChatData(chatName, e.target.querySelector("span").innerText);
+    const chatText = e.target.querySelector("span").innerText
+    const chatdata = new ChatData(chatName, chatText, chatImg);
     if ( chatBoxActive ) {
         setChatdata(chatdata.name, chatdata.chat,'',true);
         chatBox.classList.remove("on");
         chatBoxActive = false;
     } else {
-        setChatdata(chatdata.name, chatdata.chat, chatImg);
+        setChatdata(chatdata.name, chatdata.chat, chatdata.img);
         chatBox.classList.add("on");
         chatBoxActive = true;
     }

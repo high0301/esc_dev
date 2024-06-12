@@ -4,6 +4,12 @@
   font-weight: 400;
   font-style: normal;
 }
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 html, body { margin: 0; padding: 0; font-family: 'Pretendard-Regular'; font-style: normal; font-weight: 400; }
 em { text-decoration: unset; font-style: unset; }
 p { all: unset; display: block; }
@@ -181,6 +187,7 @@ p { all: unset; display: block; }
   filter: drop-shadow(9px 12px 5px rgba(0,0,0,0.2));
   transform: translateY(40px);
   opacity: 0;
+  pointer-events: none;
   &.on {
     transform: translateY(0);
     opacity: 1;
@@ -211,6 +218,59 @@ p { all: unset; display: block; }
     .comment {
       font-size: 13px;
       line-height: 1.5em;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    .img {
+      margin-left: 0;
+    }
+  }
+}
+
+.scene-title {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  //transition: all 0.3s;
+  opacity: 0;
+  filter: blur(20px);
+  letter-spacing: 0.3em;
+  pointer-events: none;
+  h2 {
+    font-size: 80px;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-family: 'GmarketSansMedium';
+    //transition: all 0.5s;
+    letter-spacing: inherit;
+  }
+  &.on {
+    //opacity: 1;
+    //filter: blur(0);
+    animation: scent-title 2s forwards;
+  }
+  @keyframes scent-title {
+    0% {
+      opacity: 0;
+      filter: blur(20px);
+    }
+    50% {
+      opacity: 1;
+      filter: blur(0);
+      letter-spacing: 1em;
+    }
+    100% {
+      opacity: 0;
+      filter: blur(20px);
+      letter-spacing: 3em;
     }
   }
 }

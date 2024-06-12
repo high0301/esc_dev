@@ -16,8 +16,13 @@ function chatData(name, chat) {
     this.name = name;
     this.chat = chat;
 }
+
+function getScenePosition(scene) {
+    return document.querySelector(scene).offsetTop;
+}
+
 const logData = {
-    scene: Array(13),
+    scene: Array(20),
     player: {
         miho: new PlayerData('miho','a', '#ff9800'),
         nagai: new PlayerData('nagai','a', '#f44336'),

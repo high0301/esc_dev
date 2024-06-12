@@ -3,10 +3,10 @@ window.onload = function () {
 
     const allChat = document.querySelectorAll('.chat')
     allChat.forEach((value, key) => {
-        value.addEventListener('click', chatClickEvnet);
+        value.addEventListener('click', chatClickEvnet, false);
     })
 
-    window.addEventListener("scroll", scrollEvent);
+    // window.addEventListener("scroll", scrollEvent);
 
     for (let i= 1; i <= logData.scene; i++) {
         // ScrollTrigger.create({
@@ -61,9 +61,10 @@ function PlayerData(name, image, color) {
     this.color = color;
 }
 
-function chatData(name, chat) {
+function ChatData(name, chat, img) {
     this.name = name;
     this.chat = chat;
+    this.img = img;
 }
 
 function getScenePosition(scene) {
@@ -73,11 +74,11 @@ function getScenePosition(scene) {
 const logData = {
     scene: 20,
     player: {
-        miho: new PlayerData('miho','a', '#ff9800'),
-        nagai: new PlayerData('nagai','a', '#f44336'),
-        miyu: new PlayerData('miyu','a', '#ffaec9'),
-        ama: new PlayerData('ama','a', '#e0e0e0'),
-        mai: new PlayerData('mai','a', '#ffeb3b'),
+        miho: new PlayerData('미호','https://i.imgur.com/ixJzkOQ.png', '#ff9800'),
+        nagai: new PlayerData('나가이','https://i.imgur.com/BLRIbhB.png', '#f44336'),
+        miyu: new PlayerData('미유','https://i.imgur.com/kflsRzW.png', '#ffaec9'),
+        ama: new PlayerData('아마','https://i.imgur.com/hbVkkjW.png', '#e0e0e0'),
+        mai: new PlayerData('마이','https://i.imgur.com/ZGRuJYd.png', '#ffeb3b'),
     },
     background: [
         ''
@@ -88,6 +89,34 @@ const scrollEvent = (e) => {
 
 }
 
+let chatBoxActive = false;
 const chatClickEvnet = (e) => {
-    console.log(e.target);
+    const chatClass = e.target.classList[1] === 'desc' ? undefined : e.target.classList[1];
+    const chatBox = document.querySelector(".characterBox");
+    const chatName = e.target.querySelector("strong").innerText;
+    const chatImg = logData.player[chatClass]?.image ? logData.player[chatClass].image : '' ;
+    const chatdata = new ChatData(chatName, e.target.querySelector("span").innerText);
+    if ( chatBoxActive ) {
+        setChatdata(chatdata.name, chatdata.chat,'',true);
+        chatBox.classList.remove("on");
+        chatBoxActive = false;
+    } else {
+        setChatdata(chatdata.name, chatdata.chat, chatImg);
+        chatBox.classList.add("on");
+        chatBoxActive = true;
+    }
+}
+
+let isReset = false;
+function setChatdata(name, chat, img, reset) {
+    isReset = reset;
+    if ( isReset ) {
+        document.querySelector("#char-img").src = '';
+        document.querySelector(".commentBox .name").innerHTML = '';
+        document.querySelector(".commentBox .comment").innerHTML = '';
+    } else {
+        document.querySelector("#char-img").src = img;
+        document.querySelector(".commentBox .name").innerHTML = name;
+        document.querySelector(".commentBox .comment").innerHTML = chat;
+    }
 }

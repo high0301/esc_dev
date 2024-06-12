@@ -56,6 +56,7 @@ p { all: unset; display: block; }
     width: 110px;
     text-align: right;
     word-break: keep-all;
+    font-weight: 700;
   }
   span {
     line-height: 1.5em;
@@ -94,6 +95,39 @@ p { all: unset; display: block; }
     strong {
       background: #ffeb3b;
       color: #111;
+    }
+  }
+}
+
+.characterBox {
+  position: fixed;
+  bottom: 40px;
+  width: 100%;
+  z-index: 100;
+  .commentBox {
+    width: 80%;
+    margin: 0 auto;
+    background: rgba(0,0,0,0.8);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.2);
+    padding: 12px 20px;
+    color: #fff;
+    transition: all 0.3s;
+    transform: translateY(40px);
+    opacity: 0;
+    &.on {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .name {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .comment {
+      font-size: 13px;
+      line-height: 1.5em;
     }
   }
 }

@@ -5,27 +5,25 @@ window.onload = function () {
     allChat.forEach((value, key) => {
         value.addEventListener('click', chatClickEvnet, false);
     })
+    let scenePosList = Array(logData.scene);
 
-    // window.addEventListener("scroll", scrollEvent);
-    let triggerCount = 0;
     for (let i= 1; i <= logData.scene; i++) {
+        scenePosList[i-1] = getScenePosition("#scene"+i);
         ScrollTrigger.create({
             trigger: "#scene"+i,
             start: "0 50%",
             endTrigger: "#scene"+(i+1),
             end: "bottom bottom",
             onToggle: self => {
-                triggerCount = 1;
-                if ( triggerCount === 1 ) {
-                    sceneTitle.classList.remove("on");
-                    setTimeout(function () {
-                        sceneTitle.querySelector("h2").innerText = "scene"+i;
-                        sceneTitle.classList.add("on");
-                    }, 200);
-                }
+                sceneTitle.classList.remove("on");
+                setTimeout(function () {
+                    sceneTitle.querySelector("h2").innerText = "scene"+i;
+                    sceneTitle.classList.add("on");
+                }, 200);
             }
         })
     }
+
     ScrollTrigger.create({
         trigger: ".past-scene-start",
         start: "0 50%",
@@ -86,14 +84,8 @@ const logData = {
         ama: new PlayerData('아마','https://i.imgur.com/hbVkkjW.png', '#e0e0e0'),
         mai: new PlayerData('마이','https://i.imgur.com/ZGRuJYd.png', '#ffeb3b'),
     },
-    background: [
-        ''
-    ]
 }
 
-const scrollEvent = (e) => {
-
-}
 
 let chatBoxActive = false;
 const chatClickEvnet = (e) => {
@@ -104,8 +96,10 @@ const chatClickEvnet = (e) => {
     const chatText = e.target.querySelector("span").innerText
     const chatdata = new ChatData(chatName, chatText, chatImg);
     if ( chatBoxActive ) {
-        setChatdata(chatdata.name, chatdata.chat,'',true);
         chatBox.classList.remove("on");
+        setTimeout(function () {
+            setChatdata(chatdata.name, chatdata.chat,'',true)
+        }, 350);
         chatBoxActive = false;
     } else {
         setChatdata(chatdata.name, chatdata.chat, chatdata.img);

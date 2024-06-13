@@ -36,13 +36,12 @@ p { all: unset; display: block; }
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
     text-align: center;
     z-index: 1000;
     padding: 60px;
-    box-sizing: content-box;
+    box-sizing: border-box;
     background: #fff;
     width: 100%;
     height: 100%;
@@ -51,7 +50,8 @@ p { all: unset; display: block; }
     animation: introBg 3s 2s forwards;
     opacity: 1;
     h1 {
-      font-size: 200px;
+      color: #1feeff;
+      font-size: 120px;
       margin: 0;
       line-height: 1;
       animation: intro 5s forwards;
@@ -59,10 +59,43 @@ p { all: unset; display: block; }
       transform: translateY(-50px);
       filter: blur(100px);
     }
+    i {
+      display: block;
+      margin-top: 40px;
+      width: 0;
+      height: 1px;
+      background: #1feeff;
+      opacity: 0;
+      filter: blur(100px);
+      animation: introLine 2.5s 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    @keyframes introLine {
+      0% {
+        width: 0;
+        background: #fff;
+      }
+      30% {
+        opacity: 1;
+        filter: blur(0);
+        background: #1feeff;
+      }
+      50% {
+        width: 100%;
+        background: #1feeff;
+        opacity: 1;
+      }
+      100% {
+        width: 0;
+        background: #fff;
+        opacity: 0;
+        filter: blur(0);
+      }
+    }
     em {
       display: block;
       font-size: 20px;
       margin-top: 30px;
+      color: #1feeff;
       animation: intro 3.7s 0.3s forwards;
       opacity: 0;
       transform: translateY(-30px);
@@ -93,6 +126,14 @@ p { all: unset; display: block; }
       100% {
         opacity: 0;
         transform: translateY(0);
+      }
+    }
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 60px;
+      }
+      em {
+        font-size: 16px;
       }
     }
   }
@@ -271,6 +312,12 @@ p { all: unset; display: block; }
       opacity: 0;
       filter: blur(20px);
       letter-spacing: 3em;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    h2 {
+      font-size: 40px;
     }
   }
 }

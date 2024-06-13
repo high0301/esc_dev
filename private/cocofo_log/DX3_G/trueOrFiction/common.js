@@ -7,22 +7,22 @@ window.onload = function () {
     })
 
     // window.addEventListener("scroll", scrollEvent);
-
+    let triggerCount = 0;
     for (let i= 1; i <= logData.scene; i++) {
         ScrollTrigger.create({
             trigger: "#scene"+i,
             start: "0 50%",
-            // endTrigger: "#scene"+(i+1),
-            // end: "bottom bottom",
+            endTrigger: "#scene"+(i+1),
+            end: "bottom bottom",
             onToggle: self => {
-
-            },
-            onUpdate: self => {
-                sceneTitle.querySelector("h2").innerText = "scene"+i;
-                sceneTitle.classList.add("on");
-                setTimeout(function () {
+                triggerCount = 1;
+                if ( triggerCount === 1 ) {
                     sceneTitle.classList.remove("on");
-                }, 2500);
+                    setTimeout(function () {
+                        sceneTitle.querySelector("h2").innerText = "scene"+i;
+                        sceneTitle.classList.add("on");
+                    }, 200);
+                }
             }
         })
     }

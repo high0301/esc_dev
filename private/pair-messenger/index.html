@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>메인 화면</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="common.js"></script>
+</head>
+<body>
+<div id="container">
+    <div class="pair-messenger">
+        <div class="messenger-wrapper">
+            <div class="head-area">
+                <div class="title-area">
+                    <div class="thumb"></div>
+                    <strong class="title">방제목</strong>
+                </div>
+            </div>
+            <div class="body-area">
+                <ul class="message-list">
+                    <li>
+                        <div class="message my-message">
+                            <div class="profile-thumb"></div>
+                            <div class="message-box">
+                                <p>대화내용</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="message you-message">
+                            <div class="profile-thumb"></div>
+                            <div class="message-box">
+                                <p>대화내용</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="foot-area">
+                <div class="message-form">
+                    <div class="input-area">
+                        <input type="text">
+                        <button type="button">전송</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    showMessageEvent();
+    function showMessageEvent() {
+        const allMessageBox = document.querySelectorAll(".message");
+        let count = 0;
+        let showMessageBox = setInterval(function () {
+            allMessageBox[count].classList.add("show");
+            count++;
+            console.log(count)
+        }, 1000)
+
+        if ( allMessageBox.length < count ) {
+            clearInterval(showMessageBox);
+        }
+    }
+</script>
+</body>
+</html>
